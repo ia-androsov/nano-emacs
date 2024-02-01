@@ -60,14 +60,14 @@
          (window        (get-buffer-window (current-buffer)))
          (space-up       +0.15)
          (space-down     -0.20)
-	 (prefix (cond ((string= status "RO")
-			        (propertize (if (window-dedicated-p)" -- " " RO ")
+	 (prefix (cond ((string= status "◯")
+			        (propertize (if (window-dedicated-p)" -- " " ◯ ")
                                 'face 'nano-face-header-popout))
-                   ((string= status "**")
-			        (propertize (if (window-dedicated-p)" -- " " ** ")
+                   ((string= status "⨂")
+			        (propertize (if (window-dedicated-p)" -- " " ⨂ ")
                                 'face 'nano-face-header-critical))
-                   ((string= status "RW")
-			        (propertize (if (window-dedicated-p)" -- " " RW ")
+                   ((string= status "⬤")
+			        (propertize (if (window-dedicated-p)" -- " " ⬤ ")
                                 'face 'nano-face-header-faded))
                    (t (propertize status 'face 'nano-face-header-popout))))
          (left (concat
@@ -110,7 +110,7 @@
 (with-eval-after-load 'ein
   (defun nano-modeline-ein-notebook-mode ()
     (let ((buffer-name (format-mode-line "%b")))
-      (nano-modeline-compose (if (ein:notebook-modified-p) "**" "RW")
+      (nano-modeline-compose (if (ein:notebook-modified-p) "⨂" "⬤")
                              buffer-name
                              ""
                              (ein:header-line))))
@@ -308,7 +308,7 @@
 
 (defun nano-modeline-nano-help-mode ()
   (nano-modeline-compose (nano-modeline-status)
-                         "GNU Emacs / N Λ N O"
+                         "GNU Emacs / OnEmacs"
                          "(help)"
                          ""))
 
@@ -380,7 +380,7 @@
 			    (number-to-string (pdf-cache-number-of-pages)))
 			  "???"))))
     (nano-modeline-compose
-     "RW"
+     "⬤"
      buffer-name
      (concat "(" mode-name
 	     (if branch (concat ", "
@@ -449,11 +449,11 @@
 
 ;; ---------------------------------------------------------------------
 (defun nano-modeline-status ()
-  "Return buffer status: read-only (RO), modified (**) or read-write (RW)"
+  "Return buffer status: read-only (◯), modified (⨂) or read-write (⬤)"
   
   (let ((read-only   buffer-read-only)
         (modified    (and buffer-file-name (buffer-modified-p))))
-    (cond (modified  "**") (read-only "RO") (t "RW"))))
+    (cond (modified  "⨂") (read-only "◯") (t "⬤"))))
   
 ;; ---------------------------------------------------------------------
 (defun nano-modeline-mu4e-context ()
